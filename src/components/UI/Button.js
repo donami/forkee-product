@@ -3,13 +3,11 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { shade } from 'polished';
 
-const Button = ({ color, fluid, children, ...rest }) => {
-  return (
-    <Wrapper color={color} fluid={fluid} {...rest}>
-      {children}
-    </Wrapper>
-  );
-};
+const Button = ({ color, fluid, children, ...rest }) => (
+  <Wrapper color={color} fluid={fluid} {...rest}>
+    {children}
+  </Wrapper>
+);
 
 Button.propTypes = {
   children: PropTypes.node,

@@ -5,21 +5,19 @@ import Container from '../UI/Container';
 import Button from '../UI/Button';
 import { stripUnit } from 'polished';
 
-const Hub = () => {
-  return (
-    <Wrapper>
-      <SubHeading>We play well with others</SubHeading>
-      <HubHeading>
-        Clubhouse integrates with your process and the most important tools you
-        use every day – from code review to bug reporting, file sharing, and
-        team communication.
-      </HubHeading>
-      <Bottom>
-        <Button primary>Connect your tools</Button>
-      </Bottom>
-    </Wrapper>
-  );
-};
+const Hub = () => (
+  <Wrapper>
+    <SubHeading>We play well with others</SubHeading>
+    <HubHeading>
+      Clubhouse integrates with your process and the most important tools you
+      use every day – from code review to bug reporting, file sharing, and team
+      communication.
+    </HubHeading>
+    <Bottom>
+      <Button primary>Connect your tools</Button>
+    </Bottom>
+  </Wrapper>
+);
 
 export default Hub;
 

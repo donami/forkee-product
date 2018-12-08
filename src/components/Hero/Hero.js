@@ -6,30 +6,27 @@ import Container from '../UI/Container';
 import Input from '../UI/Input';
 import Button from '../UI/Button';
 
-const Hero = () => {
-  return (
-    <Wrapper>
-      <Container>
-        <Content className="hero-content">
-          <h1 className="hero-heading">
-            Time to create. <span>Together</span>.
-          </h1>
-          <div className="hero-body">
-            <p>
-              The first project management platform for software development
-              that brings everyone on every team together to build better
-              products.
-            </p>
-          </div>
-          <div className="hero-bottom">
-            <Input />
-            <Button primary>Sign up</Button>
-          </div>
-        </Content>
-      </Container>
-    </Wrapper>
-  );
-};
+const Hero = () => (
+  <Wrapper>
+    <Container>
+      <Content className="hero-content">
+        <h1 className="hero-heading">
+          Time to create. <span>Together</span>.
+        </h1>
+        <div className="hero-body">
+          <p>
+            The first project management platform for software development that
+            brings everyone on every team together to build better products.
+          </p>
+        </div>
+        <div className="hero-bottom">
+          <Input />
+          <Button primary>Sign up</Button>
+        </div>
+      </Content>
+    </Container>
+  </Wrapper>
+);
 
 export default Hero;
 
