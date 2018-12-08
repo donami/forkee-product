@@ -9,6 +9,7 @@
 
 import React from 'react';
 import cx from 'classnames';
+import styled from 'styled-components';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Navigation.css';
 import Link from '../Link';
@@ -16,24 +17,34 @@ import Link from '../Link';
 class Navigation extends React.Component {
   render() {
     return (
-      <div className={s.root} role="navigation">
-        <Link className={s.link} to="/about">
-          About
-        </Link>
-        <Link className={s.link} to="/contact">
-          Contact
-        </Link>
-        <span className={s.spacer}> | </span>
-        <Link className={s.link} to="/login">
-          Log in
-        </Link>
-        <span className={s.spacer}>or</span>
-        <Link className={cx(s.link, s.highlight)} to="/register">
-          Sign up
-        </Link>
-      </div>
+      <Wrapper role="navigation">
+        <Link to="/about">About</Link>
+        <Link to="/contact">Contact</Link>
+        <Link to="/login">Log in</Link>
+      </Wrapper>
     );
   }
 }
 
-export default withStyles(s)(Navigation);
+export default Navigation;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+
+  > * {
+    display: block;
+    padding: 30px;
+  }
+
+  a {
+    color: ${props => props.theme.colors.text};
+    font-weight: 600;
+
+    &:hover {
+      color: ${props => props.theme.colors.primary};
+    }
+  }
+`;

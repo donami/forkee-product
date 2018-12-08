@@ -12,11 +12,13 @@ import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // external-global styles must be imported in your JS.
-import normalizeCss from 'normalize.css';
+// import normalizeCss from 'normalize.css';
 import s from './Layout.css';
+import styled, { ThemeProvider } from 'styled-components';
 import Header from '../Header';
-import Feedback from '../Feedback';
 import Footer from '../Footer';
+import { GlobalStyle } from '../global.css';
+import { theme } from '../../theme/theme';
 
 class Layout extends React.Component {
   static propTypes = {
@@ -25,14 +27,29 @@ class Layout extends React.Component {
 
   render() {
     return (
-      <div>
-        <Header />
-        {this.props.children}
-        <Feedback />
-        <Footer />
-      </div>
+      <ThemeProvider theme={theme}>
+        <React.Fragment>
+          <GlobalStyle />
+          <Wrapper>
+            <Header />
+            <MainContent>{this.props.children}</MainContent>
+            <Footer />
+          </Wrapper>
+        </React.Fragment>
+      </ThemeProvider>
     );
   }
 }
 
-export default withStyles(normalizeCss, s)(Layout);
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+`;
+
+const MainContent = styled.div`
+  flex: 1;
+`;
+
+export default Layout;
+// export default withStyles(normalizeCss, s)(Layout);

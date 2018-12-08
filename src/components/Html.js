@@ -49,6 +49,10 @@ class Html extends React.Component {
           ))}
           <link rel="manifest" href="/site.webmanifest" />
           <link rel="apple-touch-icon" href="/icon.png" />
+          <link
+            href="https://fonts.googleapis.com/css?family=Poppins:300,400,600"
+            rel="stylesheet"
+          />
           {styles.map(style => (
             <style
               key={style.id}
