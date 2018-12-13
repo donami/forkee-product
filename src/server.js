@@ -1,12 +1,3 @@
-/**
- * React Starter Kit (https://www.reactstarterkit.com/)
- *
- * Copyright © 2014-present Kriasoft, LLC. All rights reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE.txt file in the root directory of this source tree.
- */
-
 import path from 'path';
 import express from 'express';
 import cookieParser from 'cookie-parser';
@@ -19,6 +10,15 @@ import nodeFetch from 'node-fetch';
 import React from 'react';
 import ReactDOM from 'react-dom/server';
 import PrettyError from 'pretty-error';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { ServerStyleSheet } from 'styled-components';
+import {
+  faPlus,
+  faBars,
+  faMinus,
+  faHeart,
+  faUtensils,
+} from '@fortawesome/free-solid-svg-icons';
 import App from './components/App';
 import Html from './components/Html';
 import { ErrorPageWithoutStyle } from './routes/error/ErrorPage';
@@ -31,6 +31,8 @@ import schema from './data/schema';
 // import assets from './asset-manifest.json'; // eslint-disable-line import/no-unresolved
 import chunks from './chunk-manifest.json'; // eslint-disable-line import/no-unresolved
 import config from './config';
+
+library.add(faPlus, faMinus, faHeart, faBars, faUtensils);
 
 process.on('unhandledRejection', (reason, p) => {
   console.error('Unhandled Rejection at:', p, 'reason:', reason);
@@ -152,6 +154,12 @@ app.get('*', async (req, res, next) => {
 
     const route = await router.resolve(context);
 
+    const sheet = new ServerStyleSheet();
+    ReactDOM.renderToString(
+      sheet.collectStyles(<App context={context}>{route.component}</App>),
+    );
+    const styleTags = sheet.getStyleTags();
+
     if (route.redirect) {
       res.redirect(route.status || 302, route.redirect);
       return;
@@ -161,7 +169,8 @@ app.get('*', async (req, res, next) => {
     data.children = ReactDOM.renderToString(
       <App context={context}>{route.component}</App>,
     );
-    data.styles = [{ id: 'css', cssText: [...css].join('') }];
+    // data.styles = [{ id: 'css', cssText: [...css].join('') }];
+    data.styles = [{ id: 'css', cssText: styleTags }];
 
     const scripts = new Set();
     const addChunk = chunk => {

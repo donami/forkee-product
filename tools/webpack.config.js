@@ -1,12 +1,3 @@
-/**
- * React Starter Kit (https://www.reactstarterkit.com/)
- *
- * Copyright © 2014-present Kriasoft, LLC. All rights reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE.txt file in the root directory of this source tree.
- */
-
 import fs from 'fs';
 import path from 'path';
 import webpack from 'webpack';
@@ -114,12 +105,12 @@ const config = {
               : [['babel-plugin-styled-components', { displayName: false }]]),
             // Treat React JSX elements as value types and hoist them to the highest scope
             // https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-react-constant-elements
-            ...(isDebug ? [] : ['@babel/transform-react-constant-elements']),
-            // Replaces the React.createElement function with one that is more optimized for production
-            // https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-react-inline-elements
-            ...(isDebug ? [] : ['@babel/transform-react-inline-elements']),
-            // Remove unnecessary React propTypes from the production build
-            // https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types
+            // ...(isDebug ? [] : ['@babel/transform-react-constant-elements']),
+            // // Replaces the React.createElement function with one that is more optimized for production
+            // // https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-react-inline-elements
+            // ...(isDebug ? [] : ['@babel/transform-react-inline-elements']),
+            // // Remove unnecessary React propTypes from the production build
+            // // https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types
             ...(isDebug ? [] : ['transform-react-remove-prop-types']),
           ],
         },

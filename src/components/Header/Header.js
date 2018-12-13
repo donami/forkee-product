@@ -1,56 +1,69 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
 import Navigation from '../Navigation';
 import Link from '../Link';
 import Button from '../UI/Button';
 import Container from '../UI/Container';
+import Icon from '../Icon/Icon';
+import logo from './logo.png';
 
-class Header extends React.Component {
-  state = {
-    active: false,
-  };
+const Header = ({ menuOpen, setMenuOpen }) => {
+  const [active, setActive] = useState(false);
 
-  componentDidMount() {
-    window.addEventListener('scroll', this.handleScroll);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.handleScroll);
-  }
-
-  handleScroll = () => {
-    if (window.scrollY > 20 && !this.state.active) {
-      this.setState({ active: true });
-    } else if (window.scrollY < 20 && this.state.active) {
-      this.setState({ active: false });
+  const handleScroll = () => {
+    if (window.scrollY > 20 && !active) {
+      setActive(true);
+    } else if (window.scrollY < 20 && active) {
+      setActive(false);
     }
   };
 
-  render() {
-    const { active } = this.state;
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
 
-    return (
-      <Wrapper active={active}>
-        <Container>
-          <HeaderContainer active={active}>
-            <Left>
-              <Link to="/">
-                <h3>Forkee</h3>
-              </Link>
-            </Left>
-            <Middle>
-              <Navigation />
-            </Middle>
-            <Right>
-              <Button primary>Start free trial</Button>
-            </Right>
-          </HeaderContainer>
-        </Container>
-      </Wrapper>
-    );
-  }
-}
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  });
+
+  return (
+    <Wrapper active={active} menuOpen={menuOpen}>
+      <Container>
+        <HeaderContainer menuOpen={menuOpen} active={active}>
+          <Left menuOpen={menuOpen}>
+            <Link to="/">
+              <img src={logo} alt="Forkee" />
+            </Link>
+            <DropdownToggler>
+              <Icon
+                icon="bars"
+                onClick={() => {
+                  setMenuOpen(!menuOpen);
+                }}
+              />
+            </DropdownToggler>
+          </Left>
+          <Middle menuOpen={menuOpen}>
+            <Navigation />
+          </Middle>
+          <Right menuOpen={menuOpen}>
+            <SignInButton primary as="a" href="http://app.forkee.com">
+              Sign in
+            </SignInButton>
+            <Button primary>Start free trial</Button>
+          </Right>
+        </HeaderContainer>
+      </Container>
+    </Wrapper>
+  );
+};
+
+Header.propTypes = {
+  setMenuOpen: PropTypes.func.isRequired,
+  menuOpen: PropTypes.bool.isRequired,
+};
 
 const Wrapper = styled.div`
   box-shadow: 0 0 40px transparent;
@@ -76,6 +89,15 @@ const HeaderContainer = styled.div`
   flex: 1 1;
   padding: 0 30px;
   min-height: 100px;
+
+  ${props =>
+    props.menuOpen &&
+    css`
+      @media only screen and (max-width: 960px) {
+        flex-direction: column;
+        height: 100vh;
+      }
+    `};
 `;
 
 const Left = styled.div`
@@ -84,9 +106,14 @@ const Left = styled.div`
   justify-content: center;
   align-items: center;
 
-  h3 {
-    color: ${props => props.theme.colors.primary};
-    font-size: 1.4em;
+  @media only screen and (max-width: 960px) {
+    width: 100%;
+    justify-content: space-between;
+    margin-top: ${props => (props.menuOpen ? '17px' : 0)};
+  }
+
+  img {
+    max-height: 60px;
   }
 `;
 
@@ -96,6 +123,14 @@ const Middle = styled.div`
   flex: 1 1;
   justify-content: center;
   align-items: center;
+
+  @media only screen and (max-width: 960px) {
+    display: ${props => (props.menuOpen ? 'flex' : 'none')};
+
+    > div {
+      flex-direction: ${props => (props.menuOpen ? 'column' : 'row')};
+    }
+  }
 `;
 
 const Right = styled.div`
@@ -103,6 +138,43 @@ const Right = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
+
+  @media only screen and (max-width: 960px) {
+    display: ${props => (props.menuOpen ? 'flex' : 'none')};
+    border-top: 1px solid #ececec;
+    padding: ${props => props.theme.padding} 0;
+  }
+`;
+
+const DropdownToggler = styled.div`
+  display: none;
+
+  i,
+  svg {
+    font-size: 2em;
+    cursor: pointer;
+
+    &:hover {
+      color: ${props => props.theme.colors.primary};
+    }
+  }
+
+  @media only screen and (max-width: 960px) {
+    display: block;
+  }
+`;
+
+const SignInButton = styled(Button)`
+  margin-right: 20px;
+  background-color: transparent;
+  color: #555;
+  font-weight: bold;
+  font-size: 1em;
+
+  &:hover {
+    background-color: transparent;
+    color: ${props => props.theme.colors.primary};
+  }
 `;
 
 export default Header;

@@ -13,7 +13,7 @@ const Input = styled.input`
   ${props =>
     props.fluid &&
     css`
-      width: 100%;
+      width: calc(100% - 30px);
     `} &:focus {
     border-color: #85b7d9;
     box-shadow: 0 0 0 0 rgba(34, 36, 38, 0.35) inset;

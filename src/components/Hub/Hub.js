@@ -9,9 +9,9 @@ const Hub = () => (
   <Wrapper>
     <SubHeading>We play well with others</SubHeading>
     <HubHeading>
-      Clubhouse integrates with your process and the most important tools you
-      use every day – from code review to bug reporting, file sharing, and team
-      communication.
+      Forkee is an easy plug and play booking platform, that you can easily
+      integrate on your resturant's site. Customize opening times and guest
+      capacity easily in the built in admin platform.
     </HubHeading>
     <Bottom>
       <Button primary>Connect your tools</Button>

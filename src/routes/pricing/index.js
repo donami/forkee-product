@@ -1,5 +1,6 @@
 import React from 'react';
-// import Pricing from './Pricing';
+
+import Pricing from './Pricing';
 import Layout from '../../components/Layout';
 
 function action() {
@@ -8,7 +9,7 @@ function action() {
     title: 'Pricing',
     component: (
       <Layout>
-        <div>hello</div>
+        <Pricing />
       </Layout>
     ),
   };

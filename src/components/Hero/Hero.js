@@ -1,32 +1,31 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { stripUnit } from 'polished';
 
 import Container from '../UI/Container';
-import Input from '../UI/Input';
-import Button from '../UI/Button';
 
-const Hero = () => (
+const Hero = ({ title, children, bottom }) => (
   <Wrapper>
     <Container>
       <Content className="hero-content">
-        <h1 className="hero-heading">
-          Time to create. <span>Together</span>.
-        </h1>
-        <div className="hero-body">
-          <p>
-            The first project management platform for software development that
-            brings everyone on every team together to build better products.
-          </p>
-        </div>
-        <div className="hero-bottom">
-          <Input />
-          <Button primary>Sign up</Button>
-        </div>
+        <h1 className="hero-heading">{title}</h1>
+        <div className="hero-body">{children}</div>
+        {bottom && <div className="hero-bottom">{bottom}</div>}
       </Content>
     </Container>
   </Wrapper>
 );
+
+Hero.propTypes = {
+  title: PropTypes.oneOfType([PropTypes.node, PropTypes.string]).isRequired,
+  children: PropTypes.node.isRequired,
+  bottom: PropTypes.node,
+};
+
+Hero.defaultProps = {
+  bottom: undefined,
+};
 
 export default Hero;
 
