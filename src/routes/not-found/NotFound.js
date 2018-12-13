@@ -1,19 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-class NotFound extends React.Component {
-  static propTypes = {
-    title: PropTypes.string.isRequired,
-  };
+const NotFound = ({ title }) => (
+  <div>
+    <h1>{title}</h1>
+    <p>Sorry, the page you were trying to view does not exist.</p>
+  </div>
+);
 
-  render() {
-    return (
-      <div>
-        <h1>{this.props.title}</h1>
-        <p>Sorry, the page you were trying to view does not exist.</p>
-      </div>
-    );
-  }
-}
+NotFound.propTypes = {
+  title: PropTypes.string.isRequired,
+};
 
 export default NotFound;

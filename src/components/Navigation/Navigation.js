@@ -3,17 +3,13 @@ import styled from 'styled-components';
 
 import Link from '../Link';
 
-class Navigation extends React.Component {
-  render() {
-    return (
-      <Wrapper role="navigation">
-        <Link to="/about">About</Link>
-        <Link to="/pricing">Pricing</Link>
-        <Link to="/contact">Contact</Link>
-      </Wrapper>
-    );
-  }
-}
+const Navigation = () => (
+  <Wrapper role="navigation">
+    <Link to="/about">About</Link>
+    <Link to="/pricing">Pricing</Link>
+    <Link to="/contact">Contact</Link>
+  </Wrapper>
+);
 
 export default Navigation;
 
